@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
         }
-        #work{
+        #work {
             width: 100%;
             height: 100vh;
             background-color: black;
@@ -17,7 +17,7 @@
             justify-content: center;
             align-items: center;
         }
-        #passcont{
+        #passcont {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -25,11 +25,11 @@
             padding: 20px;
             border-radius: 10px;
         }
-        #top{
+        #top {
             background-color: #fff;
             border-radius: 10px;
         }
-        ion-icon{
+        ion-icon {
             color: black;
             cursor: pointer;
         }
@@ -39,7 +39,7 @@
             border-radius: 10px;
             border: 0;
         }
-        span{
+        span {
             display: inline-flex;
             justify-content: center;
             align-items: center;
@@ -49,12 +49,26 @@
         input[type="range"] {
             width: 100%;
         }
-        button{
+        button {
             font-weight: bold;
             font-size: 15px;
             padding: 5px;
             background-color: green;
             cursor: pointer;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            #passcont {
+                max-width: 80%;
+            }
+            input[type="text"] {
+                width: 80%;
+            }
+            button,
+            input[type="range"] {
+                width: 100%
+            }
         }
     </style>
     <title>Password Generator</title>
@@ -65,7 +79,7 @@
         <h2>Ariz Password Generator</h2>
         <div id="top">
         <input type="text" name="password" id="passwd" placeholder="e.g Pg46$#gd76" readonly>
-        <span><ion-icon name="copy-outline"></ion-icon></span>
+        <span id="copy-btn"><ion-icon name="copy-outline" onclick="copy()"></ion-icon></span>
         </div>
         <div id="features">
             <h3>Character length: <span for="length" id="lenghtLabel">10</span></h3>
@@ -132,8 +146,24 @@
                 lenghtLabel.textContent = lengthRange.value
             }
         })
+        function copy() {
+        passwordInput = document.getElementById("passwd")
+            passwordInput.select();
+            passwordInput.setSelectionRange(0, 9999);
+            document.execCommand('copy');
+        }
+        </script>
+        <script> document.addEventListener('DOMContentLoaded', function() {
+            var copyButton = document.getElementById('copy-btn');
+            copyButton.addEventListener('click', function() {
+                copyButton.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon>';
+                setTimeout(function() {
+                    copyButton.innerHTML = '<ion-icon name="copy-outline"></ion-icon>';
+                }, 3000);
+            });
+        });
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
-</html>
+    </html>
