@@ -16,6 +16,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            animation: backgroundAnimation 5s infinite;
+        }
+        @keyframes backgroundAnimation {
+            0% { background-color: black; }
+            50% { background-color: #343434; }
+            100% { background-color: black; }
         }
         #passcont {
             display: flex;
@@ -159,11 +165,11 @@
                 copyButton.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon>';
                 setTimeout(function() {
                     copyButton.innerHTML = '<ion-icon name="copy-outline"></ion-icon>';
-                }, 3000);
+                }, 2000);
             });
         });
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
-    </html>
+</html>
