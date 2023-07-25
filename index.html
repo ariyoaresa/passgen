@@ -9,6 +9,7 @@
             margin: 0;
         }
         #work {
+            position: relative;
             width: 100%;
             height: 100vh;
             background-color: black;
@@ -16,7 +17,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: backgroundAnimation 5s infinite;            
+            overflow: hidden;
+        }
+        .bubble {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 25%;
+            backdrop-filter: blur(10px);
         }
         @keyframes backgroundAnimation {
             0% { background-color: black; }
@@ -31,6 +41,7 @@
             background-color: rgb(65, 57, 57);
             padding: 20px;
             border-radius: 10px;
+            z-index: 1;
         }
         #top {
             background-color: #fff;
@@ -105,6 +116,7 @@
     </div>
         </div>
     <script>
+        
         document.addEventListener("DOMContentLoaded", function() {
             const lengthRange = document.getElementById("length")
             const lenghtLabel = document.getElementById("lenghtLabel")
@@ -169,6 +181,64 @@
                     copyButton.innerHTML = '<ion-icon name="copy-outline"></ion-icon>';
                 }, 3000);
             });
+        });
+    </script>
+    <script> document.addEventListener("DOMContentLoaded", function() {
+            const container = document.getElementById("work");
+            const numBubbles = 10; // Number of bubbles to create
+            const bubbles = [];
+
+            for (let i = 0; i < numBubbles; i++) {
+                const bubble = document.createElement("div");
+                bubble.className = "bubble";
+                container.appendChild(bubble);
+                bubbles.push({
+                    element: bubble,
+                    x: Math.random() * (container.clientWidth - 25),
+                    y: Math.random() * (container.clientHeight - 25),
+                    speedX: (Math.random() - 0.5) * 5,
+                    speedY: (Math.random() - 0.5) * 5,
+                });
+            }
+
+            function animateBubbles() {
+                for (const bubble of bubbles) {
+                    bubble.x += bubble.speedX;
+                    bubble.y += bubble.speedY;
+
+                    // Check collision with container's walls
+                    if (bubble.x <= 0 || bubble.x >= container.clientWidth - 25) {
+                        bubble.speedX *= -1;
+                    }
+                    if (bubble.y <= 0 || bubble.y >= container.clientHeight - 25) {
+                        bubble.speedY *= -1;
+                    }
+
+                    // Check collision with other bubbles
+                    for (const otherBubble of bubbles) {
+                        if (otherBubble !== bubble) {
+                            const dx = bubble.x - otherBubble.x;
+                            const dy = bubble.y - otherBubble.y;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+
+                            if (distance < 25) {
+                                // Bounce off each other
+                                bubble.speedX *= -1;
+                                bubble.speedY *= -1;
+                            }
+                        }
+                    }
+
+                    // Update bubble position
+                    bubble.element.style.left = bubble.x + "px";
+                    bubble.element.style.top = bubble.y + "px";
+                }
+
+                requestAnimationFrame(animateBubbles);
+            }
+
+            // Start the animation
+            animateBubbles();
         });
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
