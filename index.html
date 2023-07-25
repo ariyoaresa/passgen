@@ -16,11 +16,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: backgroundAnimation 5s infinite;
+            animation: backgroundAnimation 5s infinite;            
         }
         @keyframes backgroundAnimation {
             0% { background-color: black; }
             50% { background-color: #343434; }
+            <!-- This code was written bz Ariz Tech -->
             100% { background-color: black; }
         }
         #passcont {
@@ -85,12 +86,13 @@
         <h2>Ariz Password Generator</h2>
         <div id="top">
         <input type="text" name="password" id="passwd" placeholder="e.g Pg46$#gd76" readonly>
-        <span id="copy-btn"><ion-icon name="copy-outline" onclick="copy()"></ion-icon></span>
+        <span id="copy-btn" onclick="copy()"><ion-icon name="copy-outline"></ion-icon></span>
         </div>
         <div id="features">
             <h3>Character length: <span for="length" id="lenghtLabel">10</span></h3>
             <input type="range" name="length" id="length" max="14" min="6"><br><br>
             <input type="checkbox" checked id="uppercase">
+            <!-- This code was written by Ariz Tech -->
             <label for="uppercase">Include UPPERCASE in password</label><br><br>
             <input type="checkbox" checked id="lowercase">
             <label for="lowercase">Include lowercase in password</label><br><br>
@@ -114,7 +116,7 @@
             const generateButton = document.querySelector("button")
 
             generateButton.addEventListener("click", generatePassword)
-            lengthRange.addEventListener("input", updateLengthLabel);
+    // This code was written by Ariz Tech        lengthRange.addEventListener("input", updateLengthLabel);
             function generatePassword() {
                 const length = lengthRange.value;
                 const includeUppercase = uppercaseCheckbox.checked;
@@ -165,7 +167,7 @@
                 copyButton.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon>';
                 setTimeout(function() {
                     copyButton.innerHTML = '<ion-icon name="copy-outline"></ion-icon>';
-                }, 2000);
+                }, 3000);
             });
         });
     </script>
