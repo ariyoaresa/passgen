@@ -112,7 +112,7 @@
             <input type="checkbox" checked id="symbol">
             <label for="symbol">Include symbol in password</label><br><br>
         </div>
-        <button>Generate</button>
+        <button class="ripple">Generate</button>
     </div>
         </div>
     <script>
@@ -183,6 +183,31 @@
                 }, 3000);
             });
         });
+    </script>
+    <script>
+        const buttons = document.querySelectorAll('.ripple')
+
+buttons.forEach(button => {
+    button.addEventListener('click', function (e) {
+        const x = e.pageX
+        const y = e.pageY
+
+        const buttonTop = e.target.offsetTop
+        const buttonLeft = e.target.offsetLeft
+
+        const xInside = x - buttonLeft
+        const yInside = y - buttonTop
+
+        const circle = document.createElement('span')
+        circle.classList.add('circle')
+        circle.style.top = yInside + 'px'
+        circle.style.left = xInside + 'px'
+
+        this.appendChild(circle)
+
+        setTimeout(() => circle.remove(), 500)
+    })
+})
     </script>
     <script> document.addEventListener("DOMContentLoaded", function() {
             const container = document.getElementById("work");
